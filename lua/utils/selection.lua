@@ -15,8 +15,8 @@ function M.getVisualSelection()
 end
 
 local function getSelectedLines()
-  local _, first_line, _, _ = unpack(vim.fn.getpos("'<"))
-  local _, last_line,  _, _ = unpack(vim.fn.getpos("'>"))
+  local _, first_line, _, _ = unpack(vim.fn.getpos("v"))
+  local _, last_line,  _, _ = unpack(vim.fn.getpos("."))
 
   if last_line < first_line  then
     return last_line, first_line
@@ -27,6 +27,7 @@ end
 
 function M.reverseLines()
   local first_line, last_line = getSelectedLines()
+  print(first_line, last_line)
   local reversed_lines = {}
   for i = last_line, first_line, -1 do
     reversed_lines[#reversed_lines + 1] = vim.fn.getline(i)
